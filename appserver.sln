@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "appserver", "appserver\appserver.csproj", "{93D65C04-856F-4B32-AFD2-F5E4B4C86365}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "appserver", "appserver\appserver.csproj", "{93D65C04-856F-4B32-AFD2-F5E4B4C86365}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityModel", "CityModel\CityModel.csproj", "{F83B938C-E9F2-4694-B6EE-33DC33AED58E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{93D65C04-856F-4B32-AFD2-F5E4B4C86365}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93D65C04-856F-4B32-AFD2-F5E4B4C86365}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93D65C04-856F-4B32-AFD2-F5E4B4C86365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83B938C-E9F2-4694-B6EE-33DC33AED58E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83B938C-E9F2-4694-B6EE-33DC33AED58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83B938C-E9F2-4694-B6EE-33DC33AED58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83B938C-E9F2-4694-B6EE-33DC33AED58E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
