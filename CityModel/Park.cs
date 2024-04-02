@@ -12,17 +12,16 @@ public partial class Park
     [Key]
     public int ParkId { get; set; }
 
-    [Unicode(false)]
-    public string? ParkName { get; set; }
+    public required string ParkName { get; set; }
 
     [Unicode(false)]
-    public string? Type { get; set; }
+    public string Type { get; set; } = null!;
 
     [Column(TypeName = "decimal(18, 3)")]
-    public decimal? Acres { get; set; }
+    public decimal Acres { get; set; }
 
     [Unicode(false)]
-    public string? Address { get; set; }
+    public string Address { get; set; } = null!;
 
     public int CityId { get; set; }
 

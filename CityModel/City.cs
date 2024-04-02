@@ -12,8 +12,7 @@ public partial class City
     [Key]
     public int CityId { get; set; }
 
-    [Unicode(false)]
-    public string? CityName { get; set; }
+    public required string CityName { get; set; } 
 
     [InverseProperty("City")]
     public virtual ICollection<Park> Parks { get; set; } = new List<Park>();
