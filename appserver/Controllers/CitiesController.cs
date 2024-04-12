@@ -10,26 +10,21 @@ namespace appserver.Controllers
     {
         // GET: api/Cities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<City>>> GetCities() =>
-            await context.Cities.OrderBy(c => c.CityName).ToListAsync();
-        
-        [HttpGet("CityParks/{id:int}")]
-        public async Task<ActionResult<IEnumerable<Park>>> GetCityParksAsync(int id)
+        public async Task<ActionResult<IEnumerable<City>>> GetCities()
         {
-            City? city = await context.Cities.FindAsync(id);
-
-            if (city == null)
-            {
-                return NotFound();
-            }
-
+            return await context.Cities.ToListAsync();
+        }
+        
+        [HttpGet("CityParks/{id}")]
+        public async Task<ActionResult<IEnumerable<Park>>> GetParksByCity(int id)
+        {
             return await context.Parks.Where(t => t.CityId == id).ToListAsync();
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<City>> GetCity(int id)
         {
-            City? city = await context.Cities.FindAsync(id);
+            var city = await context.Cities.FindAsync(id);
 
             if (city == null)
             {
@@ -40,7 +35,7 @@ namespace appserver.Controllers
 
         // PUT: api/Cities/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutCity(int id, City city)
         {
             if (id != city.CityId)
@@ -60,8 +55,10 @@ namespace appserver.Controllers
                 {
                     return NotFound();
                 }
-               
-                    throw;            
+                else
+                {
+                    throw;
+                }
             }
 
             return NoContent();

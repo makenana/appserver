@@ -12,7 +12,7 @@ namespace appserver.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Park>>> GetParks()
         {
-            return await context.Parks.Take(100).ToListAsync();
+            return await context.Parks.ToListAsync();
         }
 
         // GET: api/Parks/5
