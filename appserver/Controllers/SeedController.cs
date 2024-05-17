@@ -5,14 +5,38 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using appserver.Data;
 using CityModel;
+using Microsoft.AspNetCore.Identity;
 
 namespace appserver.Controllers;
 
     [Route("api/[controller]")]
     [ApiController]
-    public class SeedController(ProjectModelsContext db, IHostEnvironment environment) : ControllerBase
+    public class SeedController(ProjectModelsContext db, IHostEnvironment environment, UserManager<CityParkUser> userManager) : ControllerBase
     {
         private readonly string _pathName = Path.Combine(environment.ContentRootPath, "Data/LACountyParks.csv");
+
+        [HttpPost("User")]
+        public async Task<ActionResult> SeedUser()
+        {
+            (string name, string email) = ("user1", "comp584@csun.edu");
+                CityParkUser user = new()
+                {
+                    UserName = name,
+                    Email = email,
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+            if (await userManager.FindByNameAsync(name) is not null)
+            {
+                user.UserName = "user2";
+            }
+            _ = await userManager.CreateAsync(user, "P@ssw0rd!")
+                ?? throw new InvalidOperationException();
+            user.EmailConfirmed = true;
+            user.LockoutEnabled = false;
+            await db.SaveChangesAsync();
+
+            return Ok();
+        }
 
         [HttpPost("Cities")]
         public async Task<IActionResult> ImportCitiesAsync()

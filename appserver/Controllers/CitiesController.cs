@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CityModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace appserver.Controllers
 {
@@ -14,7 +15,8 @@ namespace appserver.Controllers
         {
             return await context.Cities.ToListAsync();
         }
-        
+
+        [Authorize]
         [HttpGet("CityParks/{id}")]
         public async Task<ActionResult<IEnumerable<Park>>> GetParksByCity(int id)
         {

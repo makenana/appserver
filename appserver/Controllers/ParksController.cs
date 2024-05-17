@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CityModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace appserver.Controllers
 {

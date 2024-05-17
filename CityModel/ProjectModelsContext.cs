@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace CityModel;
 
-public partial class ProjectModelsContext : DbContext
+public partial class ProjectModelsContext : IdentityDbContext<CityParkUser>
 {
     public ProjectModelsContext()
     {
@@ -31,16 +32,17 @@ public partial class ProjectModelsContext : DbContext
         optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        modelBuilder.Entity<Park>(entity =>
+        base.OnModelCreating(builder);
+        builder.Entity<Park>(entity =>
         {
             entity.HasOne(d => d.City).WithMany(p => p.Parks)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Park_Park");
         });
 
-        OnModelCreatingPartial(modelBuilder);
+        OnModelCreatingPartial(builder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
